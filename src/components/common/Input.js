@@ -1,15 +1,19 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
+//import FontAwesome, { Icons } from 'react-native-fontawesome';
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
+const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, icon }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
   
   return (
     <View style={containerStyle}>
-      <Text style={labelStyle}>{label}</Text>
+      <Text style={labelStyle}>  
+        {label}
+      </Text>
       <TextInput
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
+        placeholderTextColor='#3d675e'
         autoCorrect={false}
         style={inputStyle}
         value={value}

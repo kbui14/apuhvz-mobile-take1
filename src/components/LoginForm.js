@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser, signUpUser } from '../actions';
+import { Ionicons, FontAwesome} from '@expo/vector-icons';
 
 class LoginForm extends Component {
   onEmailChange(text){
@@ -58,6 +59,11 @@ class LoginForm extends Component {
   render() {
     return (
       <View style={styles.backgroundContainer}>
+        
+        <StatusBar
+          barStyle='light-content'
+        />
+
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
@@ -68,9 +74,9 @@ class LoginForm extends Component {
         <Card>
           <CardSection>
             <Input
+              //icon = "Icons.chevronLeft"
               label = "Email"
               placeholder="username@apu.edu"
-              placeholderTextColor={"#000"}
               onChangeText={this.onEmailChange.bind(this)}
               value={this.props.email}
             />
@@ -121,11 +127,11 @@ logoContainer: {
   alignItems: 'center',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  marginTop: 100
+  padding: 100
 },
 logo:{
-  width: 210,
-  height: 100
+  width: 250,
+  height: 120
 },
 cardContainer: {
   borderBottomWidth: 0,

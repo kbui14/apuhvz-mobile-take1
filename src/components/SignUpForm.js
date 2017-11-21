@@ -7,17 +7,16 @@ import { emailChanged, passwordChanged, loginUser } from '../actions';
 class SignUpForm extends Component {
   render(){
     return (
-      <Text style={styles}>
+      <Text style={styles.errorTextStyle}>
         Yay! Sign Up Page!!!
       </Text>  
     );
   }
 }
 
-const styles = {
+const styles ={
   errorTextStyle: {
     fontSize: 20,
-    alignSelf: 'center',
     color: 'red'
   }
 }
@@ -32,4 +31,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { 
   emailChanged, passwordChanged, loginUser
- })(LoginForm);
+ })(SignUpForm);
