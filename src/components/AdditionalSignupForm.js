@@ -6,24 +6,8 @@ import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 class SignUpForm extends Component {
 
-state = { confirmPassword: '' };
-
-      onEmailChange(text){
-        this.props.emailChanged(text)
-      }
-    
-      onPasswordChange(text){
-        this.props.passwordChanged(text)
-      }
-
-      onConfirmPasswordChange(text){
-        this.setState({ confirmPassword: text });
-      }
-    
-      onButtonPressSignUp() {
-        const { email, password } = this.props;
-        
-            this.props.signUpUser({ email, password });
+      onButtonPressFinish() {
+        this.props.finishSignup();
       }
     
       renderButton() {
@@ -33,8 +17,8 @@ state = { confirmPassword: '' };
         return (
           <View style={styles.container}>
               <View style={styles.buttonContainer}>
-              <Button onPress={this.onButtonPressSignUp.bind(this)}>
-                Create Account
+              <Button onPress={this.onButtonPressFinish.bind(this)}>
+                Finish
               </Button>
               </View>
             </View>
@@ -54,10 +38,11 @@ state = { confirmPassword: '' };
       }
 
       renderSignUp() {
-        
-            // confirm password compare it
-            // I agree
-            // sign up
+            
+            // living area
+            // alpha zombie
+            // image upload
+            // finish
         
           }
     
@@ -77,33 +62,25 @@ state = { confirmPassword: '' };
             </View>
     
             <Card>
-              <CardSection>
-                <Input
-                  //icon = "Icons.chevronLeft"
-                  label = "Email"
-                  placeholder="username@apu.edu"
-                  onChangeText={this.onEmailChange.bind(this)}
-                  value={this.props.email}
-                />
-                </CardSection>
-    
-              <CardSection>
-                <Input
-                  secureTextEntry
-                  label="Password"
-                  placeholder="Password"
-                  onChangeText={this.onPasswordChange.bind(this)}
-                />
-              </CardSection>
 
-              <CardSection>
-                <Input
-                  secureTextEntry
-                  label="Password"
-                  placeholder="Confirm Password"
-                  onChangeText={this.onConfirmPasswordChange.bind(this)}
-                />
-              </CardSection>
+              <CardSection style={{ flexDirection: 'column' }}>
+          <Text style={styles.pickerTextStyle}>Shift</Text>
+          <Picker
+            style={{ flex: 1 }}
+            selectedValue={this.props.shift}
+            onValueChange={value => this.props.employeeUpdate({ prop: 'Living area', value })}
+          >
+            <Picker.Item label="Adams" value="Adams" />
+            <Picker.Item label="Engstrom" value="Engstrom" />
+            <Picker.Item label="Smith" value="Smith" />
+            <Picker.Item label="Trinity" value="Trinity" />
+            <Picker.Item label="Alosta" value="Alosta" />
+            <Picker.Item label="Bowles" value="Bowles" />
+            <Picker.Item label="Shire Mods" value="Shire Mods" />
+            <Picker.Item label="University Park" value="University Park" />
+            <Picker.Item label="University Village" value="University Village" />
+          </Picker>
+        </CardSection>
     
               {this.renderError()}
     
@@ -170,5 +147,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { 
-  emailChanged, passwordChanged, signUpUser
- })(SignUpForm);
+  emailChanged, passwordChanged, signUpUser, finishSignup
+ })(AdditionalSignUpForm);
