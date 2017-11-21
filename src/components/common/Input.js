@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
-//import FontAwesome, { Icons } from 'react-native-fontawesome';
+import { FontAwesome } from '@expo/vector-icons';
 
 const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, icon }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
@@ -8,6 +8,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, icon 
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>  
+        <FontAwesome name={icon} size={32} color="#bbdfc6" />
         {label}
       </Text>
       <TextInput
