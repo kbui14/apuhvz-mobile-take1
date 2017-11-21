@@ -37,6 +37,12 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
+export const signUpUser = () => {
+  return() => {
+    Actions.signup();
+  };  
+};
+
 const loginUserFail = (dispatch => {
   dispatch({ type: LOGIN_USER_FAIL });
 });
@@ -49,3 +55,4 @@ const loginUserSuccess = (dispatch, user) => {
 
   Actions.main();
 };
+

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, signUpUser } from '../actions';
 
 class LoginForm extends Component {
   onEmailChange(text){
@@ -13,26 +13,40 @@ class LoginForm extends Component {
     this.props.passwordChanged(text)
   }
 
-  onButtonPress() {
+  onButtonPressLogin() {
     const { email, password } = this.props;
 
     this.props.loginUser({ email, password });
+  }
+
+  onButtonPressSignUp() {
+    this.props.signUpUser();
   }
 
   renderButton() {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
-      return (
-        <Button onPress={this.onButtonPress.bind(this)}>
-          Login
-        </Button>
-      );
-    }
+    return (
+      <View style={styles.container}>
+         <View style={styles.buttonContainer}>
+          <Button onPress={this.onButtonPressLogin.bind(this)}>
+            Login
+          </Button>
+          </View>
+          <View style={styles.buttonContainer}>
+          <Button onPress={this.onButtonPressSignUp.bind(this)}>
+            Register
+          </Button>
+          </View>
+        </View>
+
+  );
+}
   renderError() {
     if (this.props.error) {
       return (
-        <View style={{ backgroundColor: 'white' }}>
+        <View style={{ backgroundColor: 'black' }}>
           <Text style={styles.errorTextStyle}>
             {this.props.error}
           </Text>
@@ -43,42 +57,89 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label = "Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
+      <View style={styles.backgroundContainer}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../images/logo.png')}
+            />
+        </View>
+
+        <Card>
+          <CardSection>
+            <Input
+              label = "Email"
+              placeholder="username@apu.edu"
+              placeholderTextColor={"#000"}
+              onChangeText={this.onEmailChange.bind(this)}
+              value={this.props.email}
+            />
+            </CardSection>
+
+          <CardSection>
+            <Input
+              secureTextEntry
+              label="Password"
+              placeholder="password"
+              onChangeText={this.onPasswordChange.bind(this)}
+            />
           </CardSection>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-          />
-        </CardSection>
+          {this.renderError()}
 
-        {this.renderError()}
-
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+          <CardSection style={styles.cardContainer}>
+            {this.renderButton()}
+          </CardSection>
+        </Card>
+      </View>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
-  }
+  },
+  backgroundContainer: {
+    flex: 1,
+    backgroundColor: '#000000'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 2
+},
+buttonContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+logoContainer: {
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  marginTop: 100
+},
+logo:{
+  width: 210,
+  height: 100
+},
+cardContainer: {
+  borderBottomWidth: 0,
+  paddingTop: 25
+},
+inputStyle: {
+  color: 'white',
+  paddingRight: 5,
+  paddingLeft: 5,
+  fontSize: 18,
+  lineHeight: 23,
+  flex: 2
 }
+});
 
 const mapStateToProps = state => {
   return {
@@ -89,5 +150,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { 
-  emailChanged, passwordChanged, loginUser
+  emailChanged, passwordChanged, loginUser, signUpUser
  })(LoginForm);
