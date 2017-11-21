@@ -21,7 +21,7 @@ class LoginForm extends Component {
   }
 
   onButtonPressSignUp() {
-    this.props.signUpUser();
+    this.props.signUpUserPage();
   }
 
   renderButton() {
@@ -156,5 +156,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { 
-  emailChanged, passwordChanged, loginUser, signUpUser
+  emailChanged, passwordChanged, loginUser, signUpUserPage
  })(LoginForm);

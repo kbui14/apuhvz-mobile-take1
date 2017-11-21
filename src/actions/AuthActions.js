@@ -30,16 +30,34 @@ export const loginUser = ({ email, password }) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
      .then(user => loginUserSuccess(dispatch,user))
      .catch(() => {
-       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(user => loginUserSuccess(dispatch,user))
-        .catch(() => loginUserFail(dispatch));
+       // something here idk
      });
   };
 };
 
+// signs up the user
 export const signUpUser = () => {
   return() => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch(() => loginUserFail(dispatch));
+
+    Actions.additionalsignup();
+  };
+};
+
+// switches user to the sign up page from the login page
+export const signUpUserPage = () => {
+  return() => {
     Actions.signup();
+  };  
+};
+
+// switches user to the sign up page from the login page
+export const finishSignup = () => {
+  return() => {
+    // need to push information to firebase here before navigating
+    Actions.main();
   };  
 };
 
