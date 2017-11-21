@@ -4,7 +4,7 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 
-class LoginForm extends Component {
+class SignUpForm extends Component {
   render(){
     return (
       <Text style={styles}>
